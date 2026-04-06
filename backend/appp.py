@@ -22,16 +22,19 @@ def get_db_connection():
     return psycopg.connect(DATABASE_URL)
 
 # Create table if not exists
-with get_db_connection() as conn:
-    with conn.cursor() as cur:
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS messages (
-                message_id UUID PRIMARY KEY,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL,
-                message TEXT NOT NULL
-            )
-        """)
+try:
+    with get_db_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS messages (
+                    message_id UUID PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    email TEXT NOT NULL,
+                    message TEXT NOT NULL
+                )
+            """)
+except Exception as e:
+    app.logger.warning('Failed to create table at startup: %s', e)
 
 @cross_origin()
 @app.route('/send_message', methods=['POST'])
@@ -45,6 +48,16 @@ def send_message():
     try:
         with get_db_connection() as conn:
             with conn.cursor() as cur:
+                # Ensure table exists
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS messages (
+                        message_id UUID PRIMARY KEY,
+                        name TEXT NOT NULL,
+                        email TEXT NOT NULL,
+                        message TEXT NOT NULL
+                    )
+                """)
+                # Insert message
                 cur.execute("""
                     INSERT INTO messages (message_id, name, email, message)
                     VALUES (%s, %s, %s, %s)
