@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, send_from_directory
-import psycopg2
+import psycopg
 import uuid
 from dotenv import load_dotenv
 import os
