@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atanya Kumari | Web Developer Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Montserrat',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#f5f5f5;
+      color:#111;
+    }
+
+    /* ================= HEADER ================= */
+    header{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:#fff;
+      padding:20px 70px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:2px solid #111;
+      z-index:1000;
+    }
+
+    header h1{
+      font-size:20px;
+      letter-spacing:2px;
+    }
+
+    nav a{
+      margin-left:35px;
+      text-decoration:none;
+      color:#111;
+      font-weight:600;
+      font-size:14px;
+    }
+
+    nav a:hover{
+      text-decoration:underline;
+    }
+
+    /* ================= SECTIONS ================= */
+    section{
+      padding:120px 12%;
+    }
+
+    h2{
+      font-size:32px;
+      margin-bottom:20px;
+      border-left:6px solid #111;
+      padding-left:15px;
+    }
+
+    p{
+      font-size:15px;
+      line-height:1.8;
+      margin-bottom:15px;
+      color:#333;
+    }
+
+    /* ================= HOME ================= */
+    #home{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:60px;
+      align-items:center;
+      min-height:100vh;
+      margin-top:60px;
+    }
+
+    .home-left h1{
+      font-size:50px;
+      margin-bottom:15px;
+    }
+
+    .home-left h3{
+      font-size:18px;
+      margin-bottom:25px;
+      font-weight:500;
+    }
+
+    /* ================= ABOUT ================= */
+    .about-box{
+      background:#fff;
+      padding:35px;
+      border:1px solid #111;
+    }
+
+    /* ================= SKILLS ================= */
+    .skill-bar{
+      margin-bottom:20px;
+    }
+
+    .skill-bar span{
+      font-weight:600;
+      font-size:14px;
+    }
+
+    .bar{
+      width:100%;
+      height:12px;
+      background:#ddd;
+      margin-top:8px;
+    }
+
+    .bar-fill{
+      height:12px;
+      background:#111;
+    }
+
+    /* ================= PROJECTS ================= */
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+    }
+
+    .project-card{
+      background:#fff;
+      border:1px solid #111;
+      padding:30px;
+    }
+
+    /* ================= CERTIFICATES ================= */
+    .cert-list{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:25px;
+    }
+
+    .cert-card{
+      background:#fff;
+      padding:25px;
+      border:1px solid #111;
+    }
+
+    /* ================= CONTACT ================= */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+    }
+
+    .contact-box{
+      background:#fff;
+      padding:30px;
+      border:1px solid #111;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:12px;
+      margin-bottom:15px;
+      border:1px solid #111;
+      background:#f9f9f9;
+    }
+
+    button{
+      padding:12px 25px;
+      background:#111;
+      color:#fff;
+      border:none;
+      cursor:pointer;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      border-top:2px solid #111;
+      font-size:14px;
+      background:#fff;
+    }
+
+    @media(max-width:900px){
+      #home{
+        grid-template-columns:1fr;
+      }
+
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+
+      header{
+        padding:15px 20px;
+      }
+
+      nav a{
+        margin-left:20px;
+        font-size:12px;
+      }
+
+      section{
+        padding:80px 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>ATANYA KUMARI</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="home-left">
+      <h1>Frontend Developer & BCA Student</h1>
+      <h3>Building structured, scalable, and user-focused web experiences</h3>
+
+      <p>
+        I am a Bachelor of Computer Applications student with strong interest
+        in frontend development, UI design, and modern web technologies.
+        I focus on writing clean code and creating interfaces that balance
+        design and functionality.
+      </p>
+    </div>
+
+    <div class="home-right">
+      <!-- Optional image space -->
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about-box">
+      <p>
+        I am a first-year BCA student currently studying at Kristu Jayanti University.
+        My primary focus is frontend development, where I enjoy working with
+        HTML, CSS, and JavaScript to build responsive and accessible websites.
+      </p>
+      <p>
+        Alongside technical skills, I value structure, consistency, and
+        continuous improvement. I am actively building projects, completing
+        certifications, and strengthening my problem-solving abilities.
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+
+    <div class="skill-bar">
+      <span>HTML</span>
+      <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
+    </div>
+
+    <div class="skill-bar">
+      <span>CSS</span>
+      <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+    </div>
+
+    <div class="skill-bar">
+      <span>JavaScript</span>
+      <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
+    </div>
+
+    <div class="skill-bar">
+      <span>Python</span>
+      <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+    </div>
+
+    <div class="skill-bar">
+      <span>SQL</span>
+      <div class="bar"><div class="bar-fill" style="width:65%"></div></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Personal Portfolio Website</h3>
+        <p>
+          Designed and developed a responsive portfolio website using
+          HTML, CSS, and JavaScript to showcase skills and projects.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <h3>Responsive Landing Page</h3>
+        <p>
+          Built a structured landing page focusing on layout design,
+          typography, and cross-device responsiveness.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <h2>Certificates</h2>
+    <div class="cert-list">
+      <div class="cert-card">
+        <h3>Front End Web Developer Certification</h3>
+        <p><strong>Infosys Springguard</strong></p>
+        <p>February 13, 2026</p>
+      </div>
+      <div class="cert-card">
+        <h3>JavaScript Course Completion</h3>
+        <p><strong>Infosys Springguard</strong></p>
+        <p>January 25, 2026</p>
+      </div>
+      <div class="cert-card">
+        <h3>HTML5 - The Language</h3>
+        <p><strong>Infosys Springguard</strong></p>
+        <p>January 24, 2026</p>
+      </div>
+      <div class="cert-card">
+        <h3>CSS3 Course Completion</h3>
+        <p><strong>Infosys Springguard</strong></p>
+        <p>January 25, 2026</p>
+      </div>
+      <div class="cert-card">
+        <h3>Node JS: Advanced Concepts</h3>
+        <p><strong>Udemy</strong></p>
+        <p>February 12, 2026 | 16 total hours</p>
+      </div>
+      <div class="cert-card">
+        <h3>The Complete Git Guide</h3>
+        <p><strong>Udemy</strong></p>
+        <p>February 12, 2026 | 23.5 total hours</p>
+      </div>
+      <div class="cert-card">
+        <h3>Digital Engineering</h3>
+        <p><strong>FutureSkills Prime (NASSCOM)</strong></p>
+        <p>October 27, 2025 | Gold Category</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <p><strong>Email:</strong> atanyakumari109@gmail.com</p>
+        <p><strong>LinkedIn:</strong> linkedin.com/in/atanya-kumari</p>
+      </div>
+
+      <div class="contact-box">
+        <form id="contactForm">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Atanya Kumari | Professional Portfolio
+  </footer>
+
+  <!-- EmailJS & NeonDB Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("IvPIUoPEwuHiD3Doq"); // Replace with your EmailJS public key
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = {
+        name: this.name.value,
+        email: this.email.value,
+        message: this.message.value
+      };
+
+      // 1️⃣ Send email via EmailJS
+      emailjs.send("service_v4ms0o1", "template_poxeubo", {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: "atanyakumari109@gmail.com"
+      }).then(function() {
+        console.log('Email sent successfully!');
+      }, function(error) {
+        console.error('EmailJS error:', error.text);
+      });
+
+      // 2️⃣ Send data to Flask backend (NeonDB)
+      try {
+        const response = await fetch('http://localhost:5001/send_message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if(result.status === 'success'){
+          alert('Message sent via email and saved to DB! ID: ' + result.message_id);
+          this.reset();
+        } else {
+          alert('DB Error: ' + result.error);
+        }
+      } catch (err) {
+        alert('Network error: ' + err.message);
+      }
+    });
+  </script>
+
+</body>
+</html>
