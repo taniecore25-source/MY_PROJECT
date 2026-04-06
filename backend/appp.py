@@ -19,7 +19,7 @@ def index():
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 def get_db_connection():
-    return psycopg2.connect(DATABASE_URL)
+    return psycopg.connect(DATABASE_URL)
 
 # Create table if not exists
 with get_db_connection() as conn:
