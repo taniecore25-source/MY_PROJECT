@@ -396,6 +396,8 @@
         message: this.message.value
       };
 
+      const backendUrl = `http://${window.location.hostname}:5000/send_message`;
+
       // 1️⃣ Send email via EmailJS
       emailjs.send("service_v4ms0o1", "template_poxeubo", {
         from_name: formData.name,
@@ -410,11 +412,15 @@
 
       // 2️⃣ Send data to Flask backend (NeonDB)
       try {
-        const response = await fetch('http://localhost:5001/send_message', {
+        const response = await fetch(backendUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
+
+        if (!response.ok) {
+          throw new Error(`Server responded with status ${response.status}`);
+        }
 
         const result = await response.json();
 

@@ -1,70 +1,85 @@
 from flask import Flask, request, jsonify, send_from_directory
-import psycopg
+import json
 import uuid
-from dotenv import load_dotenv
 import os
 from flask_cors import CORS, cross_origin
-
-# Load environment variables
-load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
+BASE_DIR = os.path.dirname(__file__)
+FRONTEND_DIR = os.path.normpath(os.path.join(BASE_DIR, '..', 'fronend'))
+MESSAGES_FILE = os.path.join(BASE_DIR, 'messages.json')
+
 @app.route('/')
 def index():
-    return send_from_directory('../fronend', 'index.html')
+    return send_from_directory(FRONTEND_DIR, 'index.html')
 
-# NeonDB connection
-DATABASE_URL = os.getenv("DATABASE_URL")
+@app.route('/<path:path>')
+def static_proxy(path):
+    return send_from_directory(FRONTEND_DIR, path)
 
-def get_db_connection():
-    return psycopg.connect(DATABASE_URL)
 
-# Create table if not exists
-try:
-    with get_db_connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS messages (
-                    message_id UUID PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    email TEXT NOT NULL,
-                    message TEXT NOT NULL
-                )
-            """)
-except Exception as e:
-    app.logger.warning('Failed to create table at startup: %s', e)
+def ensure_messages_file():
+    if not os.path.exists(MESSAGES_FILE):
+        with open(MESSAGES_FILE, 'w', encoding='utf-8') as f:
+            json.dump([], f, indent=2)
+
+
+def read_messages():
+    ensure_messages_file()
+    with open(MESSAGES_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def write_messages(messages):
+    with open(MESSAGES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(messages, f, indent=2)
+
+ensure_messages_file()
+
 
 @cross_origin()
 @app.route('/send_message', methods=['POST'])
 def send_message():
-    data = request.json
-    name = data.get('name')
-    email = data.get('email')
-    message = data.get('message')
+    print("=== DEBUG: Received message submission ===")
+    data = request.get_json(silent=True)
+    print(f"DEBUG: Received data: {data}")
+    
+    if not data:
+        print("DEBUG: Invalid JSON payload")
+        return jsonify({"status": "error", "error": "Invalid JSON payload"}), 400
+
+    name = (data.get('name') or '').strip()
+    email = (data.get('email') or '').strip()
+    message = (data.get('message') or '').strip()
+    
+    print(f"DEBUG: Parsed data - Name: {name}, Email: {email}, Message: {message}")
+
+    if not name or not email or not message:
+        print("DEBUG: Missing required fields")
+        return jsonify({"status": "error", "error": "Name, email, and message are required"}), 400
+
     message_id = str(uuid.uuid4())
+    entry = {
+        "message_id": message_id,
+        "name": name,
+        "email": email,
+        "message": message
+    }
+    
+    print(f"DEBUG: Created entry: {entry}")
 
     try:
-        with get_db_connection() as conn:
-            with conn.cursor() as cur:
-                # Ensure table exists
-                cur.execute("""
-                    CREATE TABLE IF NOT EXISTS messages (
-                        message_id UUID PRIMARY KEY,
-                        name TEXT NOT NULL,
-                        email TEXT NOT NULL,
-                        message TEXT NOT NULL
-                    )
-                """)
-                # Insert message
-                cur.execute("""
-                    INSERT INTO messages (message_id, name, email, message)
-                    VALUES (%s, %s, %s, %s)
-                """, (message_id, name, email, message))
+        messages = read_messages()
+        print(f"DEBUG: Read existing messages: {messages}")
+        messages.append(entry)
+        write_messages(messages)
+        print(f"DEBUG: Successfully saved message with ID: {message_id}")
         return jsonify({"status": "success", "message_id": message_id})
     except Exception as e:
-        app.logger.error('DB insert failed: %s', e)
+        print(f"DEBUG: Error saving message: {e}")
+        app.logger.error('Failed to save message: %s', e)
         return jsonify({"status": "error", "error": str(e)}), 500
 
 if __name__ == '__main__':

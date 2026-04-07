@@ -33,9 +33,8 @@ This repository contains a personal portfolio website with a Flask backend and a
 
 - Build command: `pip install -r requirements.txt`
 - Start command: `python backend/appp.py`
-- Add `DATABASE_URL` as a Render environment variable
 
 ## Notes
 
+- Messages are stored locally in `backend/messages.json`.
 - The backend serves the frontend from `fronend/index.html`.
-- Do not commit `.env` or sensitive credentials to GitHub.
